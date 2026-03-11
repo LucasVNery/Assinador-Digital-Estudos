@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Assinador Digital — Entrar</title>
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+
+<nav>
+  <a href="/" class="nav-brand">&#128274; Assinador Digital</a>
+  <div class="nav-links">
+    <a href="/verify">Verificar Assinatura</a>
+  </div>
+</nav>
+
+<div class="container-sm">
+  <div class="hero">
+    <h1>Assinador Digital Web</h1>
+    <p>Assine documentos digitalmente com criptografia RSA-SHA256</p>
+  </div>
+
+  <div class="card">
+    <div class="tabs">
+      <button class="tab-btn active" data-tab="login">Entrar</button>
+      <button class="tab-btn" data-tab="register">Cadastrar</button>
+    </div>
+
+    <!-- Login -->
+    <div id="tab-login">
+      <form id="login-form">
+        <div class="form-group">
+          <label for="login-username">Username</label>
+          <input type="text" id="login-username" placeholder="seu_usuario" required>
+        </div>
+        <div class="form-group">
+          <label for="login-password">Senha</label>
+          <input type="password" id="login-password" placeholder="••••••" required>
+        </div>
+        <button type="submit" class="btn btn-primary btn-full" id="login-btn">Entrar</button>
+        <div id="login-error" class="alert alert-error hidden"></div>
+      </form>
+    </div>
+
+    <!-- Registro -->
+    <div id="tab-register" class="hidden">
+      <form id="register-form">
+        <div class="form-group">
+          <label for="reg-username">Username</label>
+          <input type="text" id="reg-username" placeholder="seu_usuario" required>
+        </div>
+        <div class="form-group">
+          <label for="reg-email">E-mail</label>
+          <input type="email" id="reg-email" placeholder="email@exemplo.com" required>
+        </div>
+        <div class="form-group">
+          <label for="reg-password">Senha</label>
+          <input type="password" id="reg-password" placeholder="min. 6 caracteres" required>
+        </div>
+        <button type="submit" class="btn btn-primary btn-full" id="register-btn">Cadastrar</button>
+        <div id="register-error" class="alert alert-error hidden"></div>
+        <div id="register-success" class="alert alert-success hidden"></div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<script src="/js/auth.js"></script>
+</body>
+</html>

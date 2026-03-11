@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Assinador Digital — Verificar</title>
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+
+<nav>
+  <a href="/" class="nav-brand">&#128274; Assinador Digital</a>
+  <div class="nav-links">
+    <a href="/sign">Minha Área</a>
+    <a href="/" class="btn-sm">Entrar</a>
+  </div>
+</nav>
+
+<div class="container" style="max-width:700px">
+
+  <div style="margin-bottom:1.5rem">
+    <h2 style="font-size:1.5rem;font-weight:800;">&#128270; Verificar Assinatura Digital</h2>
+    <p style="color:var(--muted);font-size:.9rem;margin-top:.35rem">
+      Página pública — qualquer pessoa pode verificar a autenticidade de uma assinatura.
+    </p>
+  </div>
+
+  <div class="card">
+    <div class="tabs">
+      <button class="tab-btn active" data-tab="by-id">Por ID</button>
+      <button class="tab-btn" data-tab="by-content">Por Conteúdo</button>
+    </div>
+
+    <!-- Verificar por ID -->
+    <div id="tab-by-id">
+      <form id="verify-id-form">
+        <div class="form-group">
+          <label for="sig-id-input">ID da Assinatura (UUID)</label>
+          <input type="text" id="sig-id-input"
+            placeholder="xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx" required>
+        </div>
+        <button type="submit" class="btn btn-primary" id="verify-id-btn">
+          Verificar
+        </button>
+      </form>
+    </div>
+
+    <!-- Verificar por Conteúdo -->
+    <div id="tab-by-content" class="hidden">
+      <form id="verify-content-form">
+        <div class="form-group">
+          <label for="vc-username">Username do Signatário</label>
+          <input type="text" id="vc-username" placeholder="nome_do_usuario" required>
+        </div>
+        <div class="form-group">
+          <label for="vc-text">Texto Original</label>
+          <textarea id="vc-text" rows="5" placeholder="Cole aqui o texto original assinado..." required></textarea>
+        </div>
+        <div class="form-group">
+          <label for="vc-sig">Assinatura (Base64)</label>
+          <textarea id="vc-sig" rows="3" placeholder="Cole aqui a assinatura em Base64..." required></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary" id="verify-content-btn">
+          Verificar
+        </button>
+      </form>
+    </div>
+
+    <div id="verify-error" class="alert alert-error hidden"></div>
+
+    <!-- Resultado -->
+    <div id="verify-result" class="hidden" style="margin-top:1.75rem">
+      <div id="status-banner" style="border-radius:8px;padding:1.25rem 1.5rem;text-align:center;margin-bottom:1.25rem">
+        <div id="status-icon" style="font-size:2.5rem;margin-bottom:.4rem"></div>
+        <div id="status-text" style="font-size:1.6rem;font-weight:800;"></div>
+        <div id="status-sub" style="font-size:.85rem;margin-top:.3rem;opacity:.8"></div>
+      </div>
+
+      <div class="meta-grid">
+        <div class="meta-item">
+          <label>Signatário</label>
+          <span id="r-username">—</span>
+        </div>
+        <div class="meta-item">
+          <label>Algoritmo</label>
+          <span id="r-algorithm">—</span>
+        </div>
+        <div class="meta-item">
+          <label>Data / Hora</label>
+          <span id="r-date">—</span>
+        </div>
+        <div class="meta-item">
+          <label>ID da Assinatura</label>
+          <span id="r-id" style="font-size:.78rem;font-family:monospace">—</span>
+        </div>
+        <div class="meta-item" style="grid-column:1/-1">
+          <label>Hash SHA-256 do documento</label>
+          <span id="r-hash" style="font-size:.78rem;font-family:monospace;word-break:break-all">—</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<script src="/js/verify.js"></script>
+</body>
+</html>

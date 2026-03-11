@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Assinador Digital — Assinar</title>
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+
+<nav>
+  <a href="/" class="nav-brand">&#128274; Assinador Digital</a>
+  <div class="nav-links">
+    <a href="/verify">Verificar</a>
+    <button id="logout-btn" class="btn btn-outline" style="font-size:.85rem;padding:.3rem .8rem;">Sair</button>
+  </div>
+</nav>
+
+<div class="container">
+
+  <!-- Barra do usuário -->
+  <div class="user-bar" id="user-bar">
+    <div>
+      <div class="username" id="user-name">Carregando...</div>
+      <div class="user-meta" id="user-email"></div>
+    </div>
+    <div style="display:flex;align-items:center;gap:.75rem">
+      <button class="btn btn-outline" style="font-size:.78rem;padding:.3rem .7rem;" id="toggle-pubkey-btn">
+        Ver chave pública
+      </button>
+    </div>
+  </div>
+  <div id="pubkey-display" class="pubkey-block"></div>
+
+  <!-- Formulário de Assinatura -->
+  <div class="card" style="margin-bottom:1.5rem">
+    <div class="card-title">&#9999;&#65039; Assinar Documento</div>
+    <form id="sign-form">
+      <div class="form-group">
+        <label for="text-input">Texto / Documento</label>
+        <textarea id="text-input" rows="6" placeholder="Cole ou digite o conteúdo a ser assinado..." required></textarea>
+      </div>
+      <button type="submit" class="btn btn-primary" id="sign-btn">
+        &#128396; Assinar com RSA-SHA256
+      </button>
+      <div id="sign-error" class="alert alert-error hidden"></div>
+    </form>
+
+    <!-- Resultado da assinatura -->
+    <div id="sign-result" class="result-box success hidden">
+      <div style="margin-bottom:.75rem">
+        <span style="font-weight:700;color:var(--success)">&#10003; Assinatura criada com sucesso!</span>
+      </div>
+
+      <div class="form-group">
+        <label>ID da Assinatura</label>
+        <div class="id-display">
+          <span id="result-id" style="flex:1"></span>
+          <button class="copy-btn" onclick="copyText('result-id', this)">Copiar</button>
+        </div>
+      </div>
+
+      <div class="form-group" style="margin-top:.75rem">
+        <label>Hash SHA-256 do texto</label>
+        <div class="id-display">
+          <span id="result-hash" style="flex:1"></span>
+          <button class="copy-btn" onclick="copyText('result-hash', this)">Copiar</button>
+        </div>
+      </div>
+
+      <div class="form-group" style="margin-top:.75rem">
+        <label>Assinatura (Base64)</label>
+        <div class="id-display" style="align-items:flex-start">
+          <span id="result-sig" style="flex:1;word-break:break-all;font-size:.72rem"></span>
+          <button class="copy-btn" onclick="copyText('result-sig', this)">Copiar</button>
+        </div>
+      </div>
+
+      <div style="margin-top:1rem">
+        <a id="verify-link" href="#" class="btn btn-outline" style="font-size:.85rem">
+          &#128270; Verificar esta assinatura
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Histórico -->
+  <div class="card">
+    <div class="card-title">&#128196; Histórico de Assinaturas</div>
+    <div id="history-loading" style="color:var(--muted);font-size:.9rem">Carregando...</div>
+    <div id="history-empty" class="hidden" style="color:var(--muted);font-size:.9rem">Nenhuma assinatura ainda.</div>
+    <div class="table-wrap hidden" id="history-table-wrap">
+      <table id="history-table">
+        <thead>
+          <tr>
+            <th>Data</th>
+            <th>Texto</th>
+            <th>Hash SHA-256</th>
+            <th>Algoritmo</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody id="history-body"></tbody>
+      </table>
+    </div>
+  </div>
+
+</div>
+
+<script src="/js/sign.js"></script>
+</body>
+</html>
