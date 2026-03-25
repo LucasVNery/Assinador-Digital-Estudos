@@ -104,4 +104,49 @@ router.get('/me', authenticate, (req, res) => {
   });
 });
 
+// GET /api/auth/users - Lista todos os usuários com suas chaves públicas
+router.get('/users', authenticate, (req, res) => {
+  try {
+    const users = db.prepare(
+      'SELECT id, username, email, public_key, created_at FROM users ORDER BY username'
+    ).all();
+
+    res.json({
+      users: users.map(u => ({
+        id: u.id,
+        username: u.username,
+        email: u.email,
+        publicKey: u.public_key,
+        createdAt: u.created_at,
+      }))
+    });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: 'Erro ao buscar usuários' });
+  }
+});
+
+// GET /api/auth/keys - Retorna chaves do usuário autenticado (pública e privada)
+router.get('/keys', authenticate, (req, res) => {
+  try {
+    const user = db.prepare(
+      'SELECT id, username, email, public_key, private_key, created_at FROM users WHERE id = ?'
+    ).get(req.user.id);
+
+    if (!user) return res.status(404).json({ error: 'Usuário não encontrado' });
+
+    res.json({
+      id: user.id,
+      username: user.username,
+      email: user.email,
+      publicKey: user.public_key,
+      privateKey: user.private_key,
+      createdAt: user.created_at,
+    });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: 'Erro ao buscar chaves' });
+  }
+});
+
 module.exports = router;

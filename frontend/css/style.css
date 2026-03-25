@@ -59,6 +59,65 @@ nav {
 }
 .nav-links .btn-sm:hover { background: var(--primary-d); color: #fff; }
 
+/* ── Dropdown ─────────────────────────────────────────────────────────── */
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+.dropdown-toggle {
+  background: none;
+  border: none;
+  color: var(--muted);
+  font-size: .9rem;
+  cursor: pointer;
+  padding: .5rem;
+  display: flex;
+  align-items: center;
+  gap: .35rem;
+  transition: color .15s;
+}
+.dropdown-toggle:hover { color: var(--primary); }
+.dropdown-toggle::after {
+  content: '▼';
+  font-size: .65rem;
+  transition: transform .2s;
+}
+.dropdown.open .dropdown-toggle::after {
+  transform: rotate(180deg);
+}
+.dropdown-menu {
+  position: absolute;
+  top: calc(100% + .5rem);
+  right: 0;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  box-shadow: 0 4px 12px rgba(0,0,0,.1);
+  min-width: 160px;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-10px);
+  transition: opacity .2s, transform .2s, visibility .2s;
+  z-index: 1000;
+}
+.dropdown.open .dropdown-menu {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+.dropdown-menu a {
+  display: block;
+  padding: .65rem 1rem;
+  color: var(--text);
+  text-decoration: none;
+  font-size: .9rem;
+  transition: background .15s;
+}
+.dropdown-menu a:hover {
+  background: var(--bg);
+  color: var(--primary);
+}
+
 /* ── Layout ───────────────────────────────────────────────────────────── */
 .container {
   max-width: 860px;
@@ -84,6 +143,40 @@ nav {
   font-weight: 700;
   margin-bottom: 1.5rem;
   color: var(--text);
+}
+
+/* ── Accordion ────────────────────────────────────────────────────────── */
+.accordion-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  cursor: pointer;
+  user-select: none;
+  margin-bottom: 0;
+  transition: color .2s;
+}
+.accordion-header:hover {
+  color: var(--primary);
+}
+.accordion-icon {
+  font-size: .8rem;
+  transition: transform .3s ease;
+  color: var(--muted);
+}
+.accordion-header.collapsed .accordion-icon {
+  transform: rotate(-90deg);
+}
+.accordion-content {
+  max-height: 2000px;
+  overflow: hidden;
+  transition: max-height .3s ease, opacity .3s ease, margin-top .3s ease;
+  opacity: 1;
+  margin-top: 1.5rem;
+}
+.accordion-content.collapsed {
+  max-height: 0;
+  opacity: 0;
+  margin-top: 0;
 }
 
 /* ── Tabs ─────────────────────────────────────────────────────────────── */

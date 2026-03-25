@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Assinador Digital — Chaves</title>
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+
+<nav>
+  <a href="/" class="nav-brand">Assinador Digital</a>
+  <div class="nav-links">
+    <a href="/sign">Assinar</a>
+    <a href="/keys">Chaves</a>
+    <a href="/verify">Verificar</a>
+    <button id="logout-btn" class="btn btn-outline" style="font-size:.85rem;padding:.3rem .8rem;">Sair</button>
+  </div>
+</nav>
+
+<div class="container">
+
+  <!-- Barra do usuário -->
+  <div class="user-bar" id="user-bar">
+    <div>
+      <div class="username" id="user-name">Carregando...</div>
+      <div class="user-meta" id="user-email"></div>
+    </div>
+  </div>
+
+  <!-- Minhas Chaves -->
+  <div class="card" style="margin-bottom:1.5rem">
+    <div class="card-title accordion-header collapsed" onclick="toggleAccordion('my-keys-content', this)">
+      <span>Minhas Chaves</span>
+      <span class="accordion-icon">▼</span>
+    </div>
+
+    <div id="my-keys-content" class="accordion-content collapsed">
+      <div class="form-group">
+        <label>Chave Pública</label>
+        <div class="id-display" style="align-items:flex-start">
+          <span id="my-public-key" style="flex:1;word-break:break-all;font-size:.72rem;white-space:pre-wrap"></span>
+          <div style="display:flex;gap:.5rem;flex-shrink:0">
+            <button class="copy-btn" onclick="copyKey('my-public-key', this)">Copiar</button>
+            <button class="copy-btn" onclick="downloadKey('my-public-key', 'chave_publica.pem')">Baixar</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="form-group" style="margin-top:1rem">
+        <label>Chave Privada</label>
+        <div class="id-display" style="align-items:flex-start">
+          <span id="my-private-key" style="flex:1;word-break:break-all;font-size:.72rem;white-space:pre-wrap"></span>
+          <div style="display:flex;gap:.5rem;flex-shrink:0">
+            <button class="copy-btn" onclick="copyKey('my-private-key', this)">Copiar</button>
+            <button class="copy-btn" onclick="downloadKey('my-private-key', 'chave_privada.pem')">Baixar</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Chaves Públicas de Todos os Usuários -->
+  <div class="card">
+    <div class="card-title" style="margin-bottom:1rem">Chaves Públicas dos Usuários</div>
+    <div id="users-loading" style="color:var(--muted);font-size:.9rem">Carregando...</div>
+    <div id="users-empty" class="hidden" style="color:var(--muted);font-size:.9rem">Nenhum outro usuário cadastrado.</div>
+    <div id="users-list" class="hidden"></div>
+  </div>
+
+</div>
+
+<script src="/js/keys.js"></script>
+</body>
+</html>

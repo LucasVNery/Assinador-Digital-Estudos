@@ -20,6 +20,7 @@ app.use('/js',  express.static(path.join(frontendDir, 'js')));
 // Páginas do frontend
 app.get('/',             (req, res) => res.sendFile(path.join(frontendDir, 'index.html')));
 app.get('/sign',         (req, res) => res.sendFile(path.join(frontendDir, 'sign.html')));
+app.get('/keys',         (req, res) => res.sendFile(path.join(frontendDir, 'keys.html')));
 app.get('/verify',       (req, res) => res.sendFile(path.join(frontendDir, 'verify.html')));
 app.get('/verify/:id',   (req, res) => res.sendFile(path.join(frontendDir, 'verify.html')));
 

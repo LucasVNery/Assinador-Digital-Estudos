@@ -79,7 +79,7 @@ document.getElementById('sign-form').addEventListener('submit', async e => {
     err.classList.remove('hidden');
   } finally {
     btn.disabled = false;
-    btn.innerHTML = '&#128396; Assinar com RSA-SHA256';
+    btn.innerHTML = 'Assinar com RSA-SHA256';
   }
 });
 
